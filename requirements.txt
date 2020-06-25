@@ -1,0 +1,5 @@
+pip==20.1.1
+setuptools==46.4.0
+pytelegrambotapi==3.7.1
+telebot==0.0.3
+requests==2.23.0
