@@ -2,9 +2,13 @@ import telebot
 
 bot = telebot.TeleBot(token='1263231073:AAGvUob4MTimlFzAKfdLDTjySnpxEhnHqxg')
 
-@bot.message_handler(commands=['start', 'help'])
+@bot.message_handler(commands=['start'])
 def send_welcome(message):
-  bot.reply_to(message, "STOP CLICKING THAT STUPID BUTTONS, PEASANT !")
+  bot.send_message(message.chat.id, "Я ЗДЕСЬ ДЛЯ ТОГО ЧТОБЫ ВЕСТИ ТЕБЯ В ЭТО ТЁМНОЕ ВРЕМЯ, КРЕСТЬЯНИН.")
+
+@bot.message_handler(commands=['help'])
+def help_to_peasant(message):
+  bot.send_message(message.chat.id, "ПОПРОСИ МЕНЯ И Я РАССКАЖУ ТЕБЕ ИСТОРИЮ.")
 
 @bot.message_handler(content_types=['text'])
 def send_text(message):
@@ -15,6 +19,6 @@ def send_text(message):
     elif message.text == 'ЗА ИМПЕРАТОРА !':
       bot.send_message(message.chat.id, 'ХОРОШИЙ КРЕСТЬЯНИН !')
     else:
-        bot.send_message(message.chat.id, 'ГОВОРИ НОРМАЛЬНО !')
+      bot.send_message(message.chat.id, 'ГОВОРИ НОРМАЛЬНО !')
 
 bot.polling()
