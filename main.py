@@ -1,7 +1,7 @@
 import telebot
 import random
 
-bot = telebot.TeleBot(token='1263231073:AAGvUob4MTimlFzAKfdLDTjySnpxEhnHqxg')
+bot = telebot.TeleBot(token=NOTOKENHERE)
 ###
 ### BUTTON FOR THE HONOR OF THE EMPERROR
 ###
