@@ -1,0 +1,55 @@
+---
+- name: Install python3
+  package:
+    name: python3-pip
+    state: present
+
+- name: Create special python user for secure unit
+  user:
+    name: emperor_bot
+    state: present
+    system: yes
+    shell: /bin/false
+
+- name: Create dirs for python scripts and unit file
+  file:
+    path: "{{ item }}" 
+    state: directory
+  with_items: 
+    - "{{ py_script_path }}"
+    - "{{ unit_path }}"
+
+- name: Deploy python scripts
+  template:
+    src: main.py.j2
+    dest: "{{ py_script_path }}/main.py"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items: 
+    - "{{ serv_pyt }}"
+
+- name: Deploy service & timer files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ unit_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  with_items:
+    - "{{ eb_timer }}"
+    - "{{ eb_service }}"
+
+- name: Daemon reload
+  systemd:
+    daemon_reload: yes
+
+- name: Enable timer
+  systemd:
+    enable: yes
+    name: "{{ eb_timer }}"
+
+- name: Start service
+  systemd:
+    state: started
+    name: "{{ eb_service }}"

@@ -1,0 +1,14 @@
+[Unit]
+Description=Emperor Bot
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3.7 /usr/local/lib/emperor_bot/main.py
+Environment=PYTHONUNBUFFERED=1
+Restart=always
+Type=notify
+User=emperor_bot
+
+[Install]
+WantedBy=default.target
+

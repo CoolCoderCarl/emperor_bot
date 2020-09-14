@@ -1,0 +1,9 @@
+[Unit] 
+Description=Runs the emperor_bot.service 1 minute after boot up
+
+[Timer] 
+OnBootSec=1m 
+Unit=emperor_bot.service
+
+[Install] 
+WantedBy=default.target

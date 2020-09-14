@@ -1,0 +1,5 @@
+py_script_path: "/usr/local/lib/emperor_bot/"
+unit_path: "/etc/systemd/system/emperor_bot/"
+
+eb_service: "emperor_bot.service"
+eb_timer: "emperor_bot.timer"
