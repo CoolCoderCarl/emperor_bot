@@ -1,12 +1,19 @@
+import os
 import telebot
 import random
 
 bot = telebot.TeleBot(token=NOTOKENHERE)
 ###
-### BUTTON FOR THE HONOR OF THE EMPERROR
+### VARIABLES
 ###
-keyForTheEmperor = telebot.types.ReplyKeyboardMarkup(True)
-keyForTheEmperor.row('ЗА ИМПЕРАТОРА !')
+greetings = ('ку','привет','здравствуй','здравствуйте','здрасьте','здорово')
+goodbyes = ('пока','прощай','прощайте','до свидания')
+###
+### BUTTONS FOR THE HONOR OF THE EMPERROR
+###
+keyForTheEmperor = telebot.types.ReplyKeyboardMarkup(True, True)
+keyForTheEmperor.row('ЗА ИМПЕРАТОРА !', 'ЛЮБЛЮ ИМПЕРАТОРА !')
+
 ###
 ### BASIC COMMANDS
 ###
@@ -17,23 +24,32 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['help'])
 def help_to_peasant(message):
-    bot.send_message(message.chat.id, 'ПРОСИ ЧТО УГОДНО !')
+    bot.send_message(message.chat.id, os.name)
 
 @bot.message_handler(commands=['story'])
 def story_for_peasant(message):
     randomStory = random.choice(secondWisdom)
     bot.send_message(message.chat.id, randomStory)
+
+@bot.message_handler(commands=['status'])
+def status_of_machine(message):
+    system_status = os.system('uptime')
+    bot.send_message(message.chat.id, system_status)
 ###
 ### TEXT SPEECH
 ###
 @bot.message_handler(content_types=['text'])
 def send_text(message):
-    if message.text == ('Привет'):
+    if message.text.lower() in greetings: 
         bot.send_message(message.chat.id, 'ПРИВЕТСТВУЮ ТЕБЯ, КРЕСТЬЯНИН.')
-    elif message.text == 'Пока':
+    elif message.text.lower() in goodbyes:
         bot.send_message(message.chat.id, 'ЗАВОД ЖДЁТ !')
     elif message.text == 'ЗА ИМПЕРАТОРА !':
         bot.send_message(message.chat.id, 'ХОРОШИЙ КРЕСТЬЯНИН !')
+    elif message.text == 'ЛЮБЛЮ ИМПЕРАТОРА !':
+        bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBTDFfU7W0oczflZY27lV-KljlkPg0TQACZgkAAnlc4gmfCor5YbYYRBsE')
+    elif message.text == 'Что*':
+        bot.send_message(message.chat.id, message.text)
     else:
         randomStory = random.choice(firstBigTalk)
         bot.send_message(message.chat.id, randomStory)
