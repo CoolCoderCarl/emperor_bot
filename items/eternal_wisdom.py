@@ -42,6 +42,32 @@ eternal_wisdom = [
         - Is there a doctor in the compartment?
         One gets up and goes to the cockpit. In 2 minutes.
         - Is there a pilot in the compartment?
+    ''',
+
+    '''
+        The doorbell rings ... in the middle of the night ...
+        - Who's there?
+        - Inquisition!
+        - And no one is at home!
+        - And who speaks then?
+        - This is the radio!
+        - Why is the light on?
+        - I'll turn it off right now!
+    ''',
+
+    '''
+        Commissar:
+        - Tomorrow we arrive at seven o'clock.
+        Question from the line:
+        - At seven in the morning or at seven in the evening?
+        Commissar:
+        - At seven in the afternoon.
+    ''',
+
+    '''
+        - Sir! Sir! We're out of cartridges!
+        - Has your faith in the Emperor dried up ?!
+        - No !!! - answered the spacemarines and continued to shoot.
     '''
 
 ]
