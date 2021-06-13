@@ -1,6 +1,8 @@
 import os
 import telebot
 import random
+import items.big_talk
+import items.eternal_wisdom
 
 api_token = os.environ['API_TOKEN']
 bot = telebot.TeleBot(token=api_token)
@@ -8,7 +10,7 @@ bot = telebot.TeleBot(token=api_token)
 ### Variables
 ###
 greetings = ('hi','hello','greetings','good morning','good day','good afternoon','good evening','good night')
-goodbyes = ('bye','good bye')
+goodbyes = ('bye','good bye','good luck')
 ###
 ### Buttons for the Honor of the Emperor
 ###
@@ -25,19 +27,31 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['help'])
 def help_to_peasant(message):
-    bot.send_message(message.chat.id, os.name)
 
-@bot.message_handler(commands=['story'])
+    welcome = ("""
+    	Hello ! Send /wisdom and have fun.
+    	""")
+
+    bot.send_message(message.chat.id, welcome)
+
+@bot.message_handler(commands=['wisdom'])
 def story_for_peasant(message):
-    randomStory = random.choice(secondWisdom)
+    randomStory = random.choice(items.eternal_wisdom)
     bot.send_message(message.chat.id, randomStory)
 
-@bot.message_handler(commands=['status'])
-def status_of_machine(message):
-    system_status = os.system('uptime')
-    bot.send_message(message.chat.id, system_status)
+    bot.send_poll(message.chat.id, "Do you like this joke ?",
+                  ["Yes !", "Yes of course !", "FOR THE EMPEROR !", "ETERNAL LOVE FOR EMPEROR !"],
+                  is_anonymous=False)
+
 ###
-### TEXT SPEECH
+### Poll about every important things will be here
+###
+# @bot.message_handler(commands=['status'])
+# def status_of_machine(message):
+#     system_status = os.system('uptime')
+#     bot.send_message(message.chat.id, system_status)
+###
+### Text speech
 ###
 @bot.message_handler(content_types=['text'])
 def send_text(message):
@@ -45,31 +59,14 @@ def send_text(message):
         bot.send_message(message.chat.id, 'GREETINGS TO YOU, PEASANT.')
     elif message.text.lower() in goodbyes:
         bot.send_message(message.chat.id, 'THE FACTORY AWAITS !')
-    elif message.text == 'FOR THE EMPEROR !':
+    elif message.text.lower() == 'FOR THE EMPEROR !':
         bot.send_message(message.chat.id, 'GOOD PEASANT !')
-    elif message.text == 'ETERNAL LOVE FOR EMPEROR !':
+    elif message.text.lower() == 'ETERNAL LOVE FOR EMPEROR !':
         bot.send_message(message.chat.id, 'AS ALWAYS !')
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBTDFfU7W0oczflZY27lV-KljlkPg0TQACZgkAAnlc4gmfCor5YbYYRBsE')
-    elif message.text.lower() == 'what*':
-        bot.send_message(message.chat.id, message.text)
     else:
-        randomStory = random.choice(firstBigTalk)
+        randomStory = random.choice(items.big_talk)
         bot.send_message(message.chat.id, randomStory)
-
-###
-### Answers
-###
-firstBigTalk = ['Once upon a time I was alive.', 'I am almost alive', 'Everyone thinks I am dead. I am alive!',
-                'Did you make it up yourself ?', 'I am glad we can just talk to you like that.',
-                'Do you listen to Me, peasant?', 'That is not the worst thing.', 'Do you talk to your parents the same way?']
-
-### LINKS WILL BE THERE
-secondWisdom = ['To each according to his duty, to everyone according to his responsibility.',
-                'Everyone must work for the good of the Imperium.',
-                'Everyone should work for the good of the Great Imperium of Mankind']
-
-thridGreatInspiration = ['Any mutant must be killed !', 'Every heretic must be burned !',
-                         'Every xenos must be destroyed !']
 
 ###
 ### Bot start here
