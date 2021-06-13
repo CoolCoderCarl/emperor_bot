@@ -36,7 +36,7 @@ def help_to_peasant(message):
 
 @bot.message_handler(commands=['wisdom'])
 def story_for_peasant(message):
-    randomStory = random.choice(items.eternal_wisdom)
+    randomStory = random.choice(items.eternal_wisdom.eternal_wisdom)
     bot.send_message(message.chat.id, randomStory)
 
     bot.send_poll(message.chat.id, "Do you like this joke ?",
@@ -65,8 +65,8 @@ def send_text(message):
         bot.send_message(message.chat.id, 'AS ALWAYS !')
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBTDFfU7W0oczflZY27lV-KljlkPg0TQACZgkAAnlc4gmfCor5YbYYRBsE')
     else:
-        randomStory = random.choice(items.big_talk)
-        bot.send_message(message.chat.id, randomStory)
+        randomAnswer = random.choice(items.big_talk.big_talk)
+        bot.send_message(message.chat.id, randomAnswer)
 
 ###
 ### Bot start here
