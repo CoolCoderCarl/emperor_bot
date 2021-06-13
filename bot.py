@@ -1,7 +1,7 @@
 import os
 import telebot
 import random
-import items.bit_talk
+import items.big_talk
 import items.eternal_wisdom
 
 api_token = os.environ['API_TOKEN']
@@ -39,6 +39,10 @@ def story_for_peasant(message):
     randomStory = random.choice(items.eternal_wisdom)
     bot.send_message(message.chat.id, randomStory)
 
+    bot.send_poll(message.chat.id, "Do you like this joke ?",
+                  ["Yes !", "Yes of course !", "FOR THE EMPEROR !", "ETERNAL LOVE FOR EMPEROR !"],
+                  is_anonymous=False)
+
 ###
 ### Poll about every important things will be here
 ###
@@ -61,7 +65,7 @@ def send_text(message):
         bot.send_message(message.chat.id, 'AS ALWAYS !')
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBTDFfU7W0oczflZY27lV-KljlkPg0TQACZgkAAnlc4gmfCor5YbYYRBsE')
     else:
-        randomStory = random.choice(items.bit_talk)
+        randomStory = random.choice(items.big_talk)
         bot.send_message(message.chat.id, randomStory)
 
 ###
