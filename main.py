@@ -2,24 +2,25 @@ import os
 import telebot
 import random
 
-bot = telebot.TeleBot(token=NOTOKENHERE)
+api_token = os.environ['API_TOKEN']
+bot = telebot.TeleBot(token=api_token)
 ###
-### VARIABLES
+### Variables
 ###
-greetings = ('ку','привет','здравствуй','здравствуйте','здрасьте','здорово')
-goodbyes = ('пока','прощай','прощайте','до свидания')
+greetings = ('hi','hello','greetings','good morning','good day','good afternoon','good evening','good night')
+goodbyes = ('bye','good bye')
 ###
-### BUTTONS FOR THE HONOR OF THE EMPERROR
+### Buttons for the Honor of the Emperor
 ###
 keyForTheEmperor = telebot.types.ReplyKeyboardMarkup(True, True)
-keyForTheEmperor.row('ЗА ИМПЕРАТОРА !', 'ЛЮБЛЮ ИМПЕРАТОРА !')
+keyForTheEmperor.row('FOR THE EMPEROR !', 'ETERNAL LOVE FOR EMPEROR !')
 
 ###
-### BASIC COMMANDS
+### Basic commands
 ###
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, 'Я ЗДЕСЬ ДЛЯ ТОГО ЧТОБЫ ВЕСТИ ТЕБЯ В ЭТО ТЁМНОЕ ВРЕМЯ, КРЕСТЬЯНИН.',
+    bot.send_message(message.chat.id, 'I AM HERE TO GUIDE YOU THROUGH THIS DARK TIMES, PEASANT.',
                      reply_markup=keyForTheEmperor)
 
 @bot.message_handler(commands=['help'])
@@ -41,32 +42,35 @@ def status_of_machine(message):
 @bot.message_handler(content_types=['text'])
 def send_text(message):
     if message.text.lower() in greetings: 
-        bot.send_message(message.chat.id, 'ПРИВЕТСТВУЮ ТЕБЯ, КРЕСТЬЯНИН.')
+        bot.send_message(message.chat.id, 'GREETINGS TO YOU, PEASANT.')
     elif message.text.lower() in goodbyes:
-        bot.send_message(message.chat.id, 'ЗАВОД ЖДЁТ !')
-    elif message.text == 'ЗА ИМПЕРАТОРА !':
-        bot.send_message(message.chat.id, 'ХОРОШИЙ КРЕСТЬЯНИН !')
-    elif message.text == 'ЛЮБЛЮ ИМПЕРАТОРА !':
+        bot.send_message(message.chat.id, 'THE FACTORY AWAITS !')
+    elif message.text == 'FOR THE EMPEROR !':
+        bot.send_message(message.chat.id, 'GOOD PEASANT !')
+    elif message.text == 'ETERNAL LOVE FOR EMPEROR !':
+        bot.send_message(message.chat.id, 'AS ALWAYS !')
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBTDFfU7W0oczflZY27lV-KljlkPg0TQACZgkAAnlc4gmfCor5YbYYRBsE')
-    elif message.text == 'Что*':
+    elif message.text.lower() == 'what*':
         bot.send_message(message.chat.id, message.text)
     else:
         randomStory = random.choice(firstBigTalk)
         bot.send_message(message.chat.id, randomStory)
 
 ###
-### ANSWERS
+### Answers
 ###
-firstBigTalk = ['Когда то и я был живым', 'Я почти жив', 'Все думают что я мёртв. А я жив !', 'Ты это сам придумал ?',
-                'Рад что мы можем просто так с тобой разговаривать', 'Ты внимаешь Мне, крестьянин ?', 'Бывало и хуже',
-                'С родителями ты так же разговариваешь ?']
+firstBigTalk = ['Once upon a time I was alive.', 'I am almost alive', 'Everyone thinks I am dead. I am alive!',
+                'Did you make it up yourself ?', 'I am glad we can just talk to you like that.',
+                'Do you listen to Me, peasant?', 'That is not the worst thing.', 'Do you talk to your parents the same way?']
 
-# LINKS WILL BE THERE
-secondWisdom = ['Каждому по обязаности, всякому по ответственности', 'Всякий должен трудиться, на благо Империума',
-                'Всякий должен трудиться, во благо Империума', 'Всякий должен трудиться, на благо Великого Империума Человечества']
+### LINKS WILL BE THERE
+secondWisdom = ['To each according to his duty, to everyone according to his responsibility.',
+                'Everyone must work for the good of the Imperium.',
+                'Everyone should work for the good of the Great Imperium of Mankind']
 
-thridGreatInspiration = ['Всякий мутант должен быть убит !', 'Всякий еретик должен быть сожжён !', 'Всякий ксенов должен быть уничтожен !']
+thridGreatInspiration = ['Any mutant must be killed !', 'Every heretic must be burned !',
+                         'Every xenos must be destroyed !']
 
 ###
-### BOT START HERE
+### Bot start here
 bot.polling()
