@@ -67,10 +67,12 @@ def feel_pain_command(message):
     random_stickers = random.choice(items.stickers.stickers)
     bot.send_message(message.chat.id, 'And you are...'  )
     bot.send_dice(message.chat.id)
-    sleep(3)
+    sleep(5)
     random_ranks = random.choice(items.rank.rank)
     bot.send_message(message.chat.id, random_ranks)
+    sleep(2)
     bot.send_message(message.chat.id, 'As always !')
+    sleep(2)
     bot.send_sticker(message.chat.id, random_stickers)
 ###
 ### Text speech
