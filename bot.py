@@ -7,6 +7,7 @@ import items.stickers
 import items.rank
 from time import sleep
 
+
 api_token = os.environ['API_TOKEN']
 bot = telebot.TeleBot(token=api_token)
 ###
