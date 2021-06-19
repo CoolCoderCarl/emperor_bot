@@ -69,6 +69,35 @@ Commissar:\n
 - Sir! Sir! We're out of cartridges!\n
 - Has your faith in the Emperor dried up ?!\n
 - No !!! - answered the spacemarines and continued to shoot.
+    ''',
+
+    '''
+Commissioner:\n
+- Soldier Kane, get out of order!\n
+Kane falls unconscious. Bolt...\n
+Commissioner:\n
+- What about him?\n
+- Out of order...
+    ''',
+
+    '''
+At the gathering of SpaceMarines veterans. Restroom. Two peasants relieve a small need.\n
+One twitches his head all the time. Another asks him:\n
+- Did you fight in the tank forces?\n
+- Yes.\n
+- Have you been in the battles on Armageddon?\n
+- Yes.\n
+- And it you there so concussed?\n
+- No, just the spray is flying.
+    ''',
+
+    '''
+In the same camp:\n
+- Today we celebrate Easter!\n
+-!?\n
+- Everyone will get one in the egg!\n
+- !!!\n
+- Here with this iron stick!    
     '''
 
 ]
