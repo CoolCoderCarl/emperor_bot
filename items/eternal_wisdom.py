@@ -8,7 +8,7 @@ Mek looks at the mug: - Eh rookie, you are really stupid, it also has no bottom!
     '''
 The inquisitor asks the infantryman:\n
 - Well, how is the Librarian doing after being wounded?\n
-- Already got on skis!\n
+- Already got up on skis!\n
 - Wow! And I only get up on women!
     ''',
 
