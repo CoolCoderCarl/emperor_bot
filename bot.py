@@ -3,6 +3,8 @@ import telebot
 import random
 import items.big_talk
 import items.eternal_wisdom
+import items.stickers
+import items.rank
 
 api_token = os.environ['API_TOKEN']
 bot = telebot.TeleBot(token=api_token)
@@ -14,8 +16,8 @@ goodbyes = ('bye','good bye','good luck','farewell','till','till next time', 'se
 ###
 ### Buttons for the Honor of the Emperor
 ###
-keyForTheEmperor = telebot.types.ReplyKeyboardMarkup(True, True)
-keyForTheEmperor.row('I LOVE YOU EMPEROR !')
+# keyForTheEmperor = telebot.types.ReplyKeyboardMarkup(True, True)
+# keyForTheEmperor.row('I LOVE YOU EMPEROR !')
 
 ###
 ### Basic commands
@@ -24,19 +26,26 @@ keyForTheEmperor.row('I LOVE YOU EMPEROR !')
 def send_welcome(message):
 
     bot.send_chat_action(message.chat.id, 'typing')
-    bot.send_message(message.chat.id, 'I AM HERE TO GUIDE YOU THROUGH THIS DARK TIMES, PEASANT.',
-                     reply_markup=keyForTheEmperor)
+    bot.send_message(message.chat.id, 'I AM HERE TO GUIDE YOU THROUGH THIS DARK TIMES, PEASANT.')#, ### Any ideas
+                     # reply_markup=keyForTheEmperor)
 
+
+###
+### Instructions
+###
 @bot.message_handler(commands=['help'])
 def help_to_peasant(message):
 
-    bot.send_chat_action(message.chat.id, 'typing')
-    welcome = ("""
-    	Hello ! Send /wisdom or /wisdom@god_emperor_bot and have fun.
-    	""")
+    welcome = ('''
+    	Hello ! Send /wisdom or /wisdom@god_emperor_bot and have fun. \n
+Also you can try to check your luck and send /feelpain or /feelpain@god_emperor_bot.
+    	''')
 
     bot.send_message(message.chat.id, welcome)
 
+###
+### Jokes command
+###
 @bot.message_handler(commands=['wisdom'])
 def story_for_peasant(message):
 
@@ -44,17 +53,22 @@ def story_for_peasant(message):
     randomWisdom = random.choice(items.eternal_wisdom.eternal_wisdom)
     bot.send_message(message.chat.id, randomWisdom)
 
-    bot.send_poll(message.chat.id, "Do you like this joke ?",
-                  ["Yes !", "Yes of course !", "FOR THE EMPEROR !"],
+    bot.send_poll(message.chat.id, 'Do you like this joke ?',
+                  ['Yes !', 'Yes of course !', 'FOR THE EMPEROR !'],
                   is_anonymous=False)
 
 ###
-### Poll about every important things will be here
+### Painfull command
 ###
-# @bot.message_handler(commands=['status'])
-# def status_of_machine(message):
-#     system_status = os.system('uptime')
-#     bot.send_message(message.chat.id, system_status)
+@bot.message_handler(commands=['feelpain'])
+def feel_pain_command(message):
+    random_stickers = random.choice(items.stickers.stickers)
+    bot.send_message(message.chat.id, 'And you are...'  )
+    bot.send_dice(message.chat.id)
+    random_ranks = random.choice(items.rank.rank)
+    bot.send_message(message.chat.id, random_ranks)
+    bot.send_message(message.chat.id, 'As always !')
+    bot.send_sticker(message.chat.id, random_stickers)
 ###
 ### Text speech
 ###
