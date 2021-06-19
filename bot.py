@@ -4,18 +4,19 @@ import random
 import items.big_talk
 import items.eternal_wisdom
 
-api_token = os.environ['API_TOKEN']
-bot = telebot.TeleBot(token=api_token)
+# api_token = os.environ['API_TOKEN']
+bot = telebot.TeleBot(token="1802734430:AAHESIJUGFg8d6P_OpF-w1BO_vgl0n0FzzI")
 ###
 ### Variables
 ###
 greetings = ('hi','hello','greetings','good morning','good day','good afternoon','good evening','good night')
-goodbyes = ('bye','good bye','good luck')
+goodbyes = ('bye','good bye','good luck','farewell','till','till next time', 'see you soon')
+examples = ('For the Emperor !','Eternal love for the Emperor !')
 ###
 ### Buttons for the Honor of the Emperor
 ###
 keyForTheEmperor = telebot.types.ReplyKeyboardMarkup(True, True)
-keyForTheEmperor.row('FOR THE EMPEROR !', 'ETERNAL LOVE FOR EMPEROR !')
+keyForTheEmperor.row('I LOVE YOU EMPEROR !')
 
 ###
 ### Basic commands
@@ -29,18 +30,18 @@ def send_welcome(message):
 def help_to_peasant(message):
 
     welcome = ("""
-    	Hello ! Send /wisdom and have fun.
+    	Hello ! Send /wisdom or /wisdom@god_emperor_bot and have fun.
     	""")
 
     bot.send_message(message.chat.id, welcome)
 
 @bot.message_handler(commands=['wisdom'])
 def story_for_peasant(message):
-    randomStory = random.choice(items.eternal_wisdom.eternal_wisdom)
-    bot.send_message(message.chat.id, randomStory)
+    randomWisdom = random.choice(items.eternal_wisdom.eternal_wisdom)
+    bot.send_message(message.chat.id, randomWisdom)
 
     bot.send_poll(message.chat.id, "Do you like this joke ?",
-                  ["Yes !", "Yes of course !", "FOR THE EMPEROR !", "ETERNAL LOVE FOR EMPEROR !"],
+                  ["Yes !", "Yes of course !", "FOR THE EMPEROR !"],
                   is_anonymous=False)
 
 ###
@@ -55,17 +56,20 @@ def story_for_peasant(message):
 ###
 @bot.message_handler(content_types=['text'])
 def send_text(message):
-    if message.text.lower() in greetings: 
-        bot.send_message(message.chat.id, 'GREETINGS TO YOU, PEASANT.')
+    if message.text.lower() in greetings:
+        bot.send_chat_action(message.chat.id, 'typing')
+        bot.send_message(message.chat.id, 'Greeting to you, peasant.')
     elif message.text.lower() in goodbyes:
-        bot.send_message(message.chat.id, 'THE FACTORY AWAITS !')
-    elif message.text.lower() == 'FOR THE EMPEROR !':
-        bot.send_message(message.chat.id, 'GOOD PEASANT !')
-    elif message.text.lower() == 'ETERNAL LOVE FOR EMPEROR !':
-        bot.send_message(message.chat.id, 'AS ALWAYS !')
+        bot.send_chat_action(message.chat.id, 'typing')
+        bot.send_message(message.chat.id, 'The factory awaits !')
+    elif message.text.lower() in examples:
+        bot.send_message(message.chat.id, 'Good peasant !')
+    elif message.text.lower() in examples:
+        bot.send_message(message.chat.id, 'As always !')
         bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAEBTDFfU7W0oczflZY27lV-KljlkPg0TQACZgkAAnlc4gmfCor5YbYYRBsE')
     else:
         randomAnswer = random.choice(items.big_talk.big_talk)
+        bot.send_chat_action(message.chat.id, 'typing')
         bot.send_message(message.chat.id, randomAnswer)
 
 ###
