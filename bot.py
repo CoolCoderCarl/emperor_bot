@@ -5,6 +5,8 @@ import items.big_talk
 import items.eternal_wisdom
 import items.stickers
 import items.rank
+from time import sleep
+
 
 api_token = os.environ['API_TOKEN']
 bot = telebot.TeleBot(token=api_token)
@@ -65,6 +67,7 @@ def feel_pain_command(message):
     random_stickers = random.choice(items.stickers.stickers)
     bot.send_message(message.chat.id, 'And you are...'  )
     bot.send_dice(message.chat.id)
+    sleep(3)
     random_ranks = random.choice(items.rank.rank)
     bot.send_message(message.chat.id, random_ranks)
     bot.send_message(message.chat.id, 'As always !')
