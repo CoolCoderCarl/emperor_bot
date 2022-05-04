@@ -3,3 +3,5 @@ setuptools==57.0.0
 pytelegrambotapi==3.7.1
 telebot==0.0.3
 requests==2.7.0
+isort
+black
