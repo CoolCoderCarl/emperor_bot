@@ -66,4 +66,4 @@ jobs:
             Branch: ${{ github.ref }}
             Pushed images: h0d0user/god_emperor:${{ needs.docker.outputs.get_current_tag }}, h0d0user/god_emperor:latest
 
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
+            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
