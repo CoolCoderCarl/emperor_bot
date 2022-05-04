@@ -60,10 +60,10 @@ jobs:
           message: |
             ${{ github.actor }} created commit:
 
-            Commit with tag: ${{ steps.docker.outputs.get_current_tag }}
+            Commit with tag: ${{ needs.docker.outputs.get_current_tag }}
 
             Repository: ${{ github.repository }}
             Branch: ${{ github.ref }}
-            Pushed images: h0d0user/god_emperor:${{ steps.docker.outputs.get_current_tag }}, h0d0user/god_emperor:latest
+            Pushed images: h0d0user/god_emperor:${{ needs.docker.outputs.get_current_tag }}, h0d0user/god_emperor:latest
 
             See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
