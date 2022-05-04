@@ -1,12 +1,13 @@
 import os
-import telebot
 import random
-import items.big_talk
-import items.eternal_wisdom
-import items.stickers
-import items.rank
 from time import sleep
 
+import telebot
+
+import items.big_talk
+import items.eternal_wisdom
+import items.rank
+import items.stickers
 
 api_token = os.environ["API_TOKEN"]
 bot = telebot.TeleBot(token=api_token)
