@@ -95,8 +95,6 @@ def feel_pain_command(message):
 
 
 # Text speech
-
-
 @bot.message_handler(content_types=["text"])
 def send_text(message):
 
