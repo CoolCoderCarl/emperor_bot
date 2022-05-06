@@ -1,10 +1,10 @@
-FROM python:3-alpine as builder
+FROM python:3.9-alpine as builder
 
 COPY ["bot.py", "/opt/"]
 COPY ["items/", "/opt/items/"]
 COPY requirements.txt requirements.txt
 
-RUN  pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
 FROM builder
 
