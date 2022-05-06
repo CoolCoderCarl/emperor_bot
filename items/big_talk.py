@@ -7,4 +7,6 @@ big_talk = [
     "Do you listen to Me, peasant?",
     "That is not the worst thing.",
     "Do you talk to your parents the same way?",
+    "I am the Emperor of The Greatest Country ever",
+    "Have you ever heard about Exterminatus ?",
 ]

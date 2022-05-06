@@ -2,9 +2,9 @@ version: '3'
 
 services:
   bot:
-    container_name: h0d0user/god_emperor:latest
-    pull_policy: always
+    container_name: god_emperor
+    image: h0d0user/god_emperor:latest
     restart: always
     network_mode: host
     environment:
-      - API_TOKEN='YOURTOKEN'
+      - API_TOKEN=YOURTOKEN
