@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [ master ]
   push:
+    branches: [ master ]
+    branches-ignore:
+      - refactor/*
+      - pipeline/*
     paths-ignore:
       - 'README.md'
       - '.dockerignore'
