@@ -3,12 +3,6 @@ name: Release
 on:
   pull_request:
     branches: [ master ]
-  push:
-    paths-ignore:
-      - 'README.md'
-      - '.dockerignore'
-      - '.gitignore'
-      - 'docker-compose.yaml'
 
 jobs:
 
