@@ -1,12 +1,20 @@
-# EmperorBot
-Simple chat bot  
-You can check the docker images here - **https://hub.docker.com/repository/docker/h0d0user/god_emperor**
+# emperor
+Leads you through dark times
 
-## How to start
 
-### Ansible way - in development
-`ansible bots_ship -m ping -i inventories/hosts -k`
+## Prehistory
+I believe that someday Emperor will be exist and live.
 
-### Docker way - recommended
-`docker pull h0d0user/god_emperor:1.0`  
-`docker run -d --restart=always --name god_emperor -e API_TOKEN=YOURTOKEN h0d0user/god_emperor:1.0`
+> Great thoughts from perfect mind for everyone.  
+> (c) Author
+
+This is Emperor from WarHammer 40K. Love Him.
+
+Enjoy.
+
+## Start
+
+### Docker Compose method
+Put your bot token to API_TOKEN variable in *docker-compose.yaml*
+
+`docker-compose up -d`
