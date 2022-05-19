@@ -1,8 +1,8 @@
-name: Publish
+name: Release
 
 on:
   pull_request:
-    branches: [ develop ]
+    branches: [ master ]
 
 jobs:
 
@@ -21,10 +21,10 @@ jobs:
         with:
           github_token: ${{ secrets.REPOS_TOKEN }}
 
-      - name: Set label develop
+      - name: Set label release
         uses: actions-ecosystem/action-add-labels@v1
         with:
-          labels: develop
+          labels: release
 
       - name: Add author as assignees
         uses: actions-ecosystem/action-add-assignees@v1
@@ -50,8 +50,10 @@ jobs:
 
   docker:
     runs-on: ubuntu-latest
-    name: Publish on DockerHub
-    needs: prepare
+    name: Release on DockerHub
+    outputs:
+      get_current_tag: ${{ steps.set_current_tag_id.outputs.current_tag }}
+
     steps:
       - name: Bump version and push tag
         id: tag_version
@@ -68,13 +70,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Search
+        run: |
+          pwd
+          ls -la
+
       - name: Build and push
         id: push_image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: h0d0user/god_emperor:${{ needs.prepare.outputs.get_current_tag }}
+          tags: h0d0user/god_emperor:latest
+
+      - name: Set tag version to output
+        id: set_current_tag_id
+        run: echo "::set-output name=current_tag::${{ steps.tag_version.outputs.new_tag }}"
 
       - name: Notify if failure
         if: ${{ failure() }}
@@ -91,10 +102,10 @@ jobs:
   telegram:
     runs-on: ubuntu-latest
     name: Notification
-    needs: [ prepare, docker ]
+    needs: docker
     steps:
 
-      - name: Notify after image was pushed
+      - name: Notify after released image
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_CHAT }}
@@ -105,13 +116,12 @@ jobs:
 
             <b>WorkFlows:</b> <a href="https://github.com/${{ github.repository }}/actions/">ActionsList</a>
 
-            Commit with tag: ${{ needs.prepare.outputs.get_current_tag }}
+            Commit with tag: ${{ needs.docker.outputs.get_current_tag }}
 
             Repository: ${{ github.repository }}
 
             Branch: ${{ github.ref }}
 
-            <b>Pushed images:</b>
-            <code>docker pull h0d0user/god_emperor:${{ needs.prepare.outputs.get_current_tag }}</code>
+            <b>Pushed images:</b> <code>docker pull h0d0user/god_emperor:latest</code>
 
             See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
