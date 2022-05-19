@@ -50,8 +50,6 @@ def send_welcome(message):
 
 
 # Instructions
-
-
 @bot.message_handler(commands=["help"])
 def help_to_peasant(message):
 
@@ -79,7 +77,7 @@ def story_for_peasant(message):
     )
 
 
-# Painfull command
+# Painful command
 @bot.message_handler(commands=["feelpain"])
 def feel_pain_command(message):
     random_stickers = random.choice(items.stickers.stickers)
