@@ -1,0 +1,42 @@
+name: Ignore and notify
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - 'README.md'
+      - '.dockerignore'
+      - '.gitignore'
+      - 'changelog.json'
+      - 'docker-compose.yaml'
+      - 'inventories/**'
+      - 'playbooks/**'
+      - 'roles/**'
+      - 'ansible.cfg'
+      - 'vault.yaml'
+
+jobs:
+
+  telegram:
+    runs-on: ubuntu-latest
+    name: Notify after update
+    steps:
+
+      - name: Notify after released image
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            ${{ github.actor }} created commit:
+
+            <b>WorkFlows:</b> <a href="https://github.com/${{ github.repository }}/actions/">ActionsList</a>
+
+            Repository: ${{ github.repository }}
+
+            Branch: ${{ github.ref }}
+
+            <b>Something were changed</b>
+
+            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
