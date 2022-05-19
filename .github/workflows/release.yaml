@@ -3,12 +3,6 @@ name: Release
 on:
   pull_request:
     branches: [ master ]
-  push:
-    paths-ignore:
-      - 'README.md'
-      - '.dockerignore'
-      - '.gitignore'
-      - 'docker-compose.yaml'
 
 jobs:
 
@@ -54,10 +48,48 @@ jobs:
             <b>Failed job:</b> https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
             See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
 
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          configuration: "changelog.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPOS_TOKEN }}
+        with:
+          tag_name: ${{ needs.prepare.outputs.get_current_tag }}
+          release_name: Release ${{ needs.prepare.outputs.get_current_tag }}
+          body: ${{ steps.github_release.outputs.changelog }}
+
+      - name: Step To run on failure
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_CHAT }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            <b>!!! FAILED !!!</b>
+            <b>Failed job:</b> https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
   docker:
     runs-on: ubuntu-latest
     name: Release on DockerHub
-    needs: prepare
+    needs: [ prepare, release ]
     steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1
@@ -74,7 +106,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: h0d0user/god_emperor:${{ needs.prepare.outputs.get_current_tag }}, god_emperor:latest
+          tags: h0d0user/god_emperor:${{ needs.prepare.outputs.get_current_tag }}, h0d0user/god_emperor:latest
 
       - name: Notify if failure
         if: ${{ failure() }}
@@ -91,7 +123,7 @@ jobs:
   telegram:
     runs-on: ubuntu-latest
     name: Notification
-    needs: [ prepare, docker ]
+    needs: [ prepare, release, docker ]
     steps:
 
       - name: Notify after released image
