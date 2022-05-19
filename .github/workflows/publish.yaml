@@ -3,6 +3,17 @@ name: Publish
 on:
   pull_request:
     branches: [ develop ]
+    paths-ignore:
+      - 'README.md'
+      - '.dockerignore'
+      - '.gitignore'
+      - 'changelog.json'
+      - 'docker-compose.yaml'
+      - 'inventories/**'
+      - 'playbooks/**'
+      - 'roles/**'
+      - 'ansible.cfg'
+      - 'vault.yaml'
 
 jobs:
 
