@@ -2,9 +2,7 @@ name: Ignore and notify
 
 on:
   push:
-    branches-ignore:
-      - refactor/*
-      - pipeline/*
+    branches: [ master ]
     paths-ignore:
       - 'README.md'
       - '.dockerignore'
