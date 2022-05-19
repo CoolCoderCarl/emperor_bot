@@ -144,7 +144,7 @@ jobs:
             Branch: ${{ github.ref }}
 
             <b>Pushed images:</b>
-            h0d0user/god_emperor:${{ needs.prepare.outputs.get_current_tag }},
+            <code>h0d0user/god_emperor:${{ needs.prepare.outputs.get_current_tag }}</code>,
             <code>docker pull h0d0user/god_emperor:latest</code>
 
             See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
