@@ -123,5 +123,5 @@ def send_text(message):
         bot.send_message(message.chat.id, random_answer)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     bot.polling()
