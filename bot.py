@@ -12,7 +12,6 @@ import items.stickers
 api_token = os.environ["API_TOKEN"]
 bot = telebot.TeleBot(token=api_token)
 
-# Variables
 greetings = (
     "hi",
     "hello",
@@ -38,10 +37,13 @@ goodbyes = (
 # keyForTheEmperor.row('I LOVE YOU EMPEROR !')
 
 
-# Basic commands
 @bot.message_handler(commands=["start"])
 def send_welcome(message):
-
+    """
+    Emperor greetings
+    :param message:
+    :return:
+    """
     bot.send_chat_action(message.chat.id, "typing")
     bot.send_message(
         message.chat.id, "I AM HERE TO GUIDE YOU THROUGH THIS DARK TIMES, PEASANT."
@@ -49,10 +51,13 @@ def send_welcome(message):
     # reply_markup=keyForTheEmperor)
 
 
-# Instructions
 @bot.message_handler(commands=["help"])
 def help_to_peasant(message):
-
+    """
+    Introduction for two command such as /wisdom & feelpain
+    :param message:
+    :return:
+    """
     welcome = """
 Hello ! Send /wisdom or /wisdom@god_emperor_bot and have fun. \n
 Also you can try to check your luck and send /feelpain or /feelpain@god_emperor_bot.
@@ -61,10 +66,13 @@ Also you can try to check your luck and send /feelpain or /feelpain@god_emperor_
     bot.send_message(message.chat.id, welcome)
 
 
-# Jokes command
 @bot.message_handler(commands=["wisdom"])
 def story_for_peasant(message):
-
+    """
+    Share the wisdom
+    :param message:
+    :return:
+    """
     bot.send_chat_action(message.chat.id, "typing")
     random_wisdom = random.choice(items.eternal_wisdom.eternal_wisdom)
     bot.send_message(message.chat.id, random_wisdom)
@@ -77,9 +85,13 @@ def story_for_peasant(message):
     )
 
 
-# Painful command
 @bot.message_handler(commands=["feelpain"])
 def feel_pain_command(message):
+    """
+    Generate jokes with random ranks
+    :param message:
+    :return:
+    """
     random_stickers = random.choice(items.stickers.stickers)
     bot.send_message(message.chat.id, "And you are...")
     bot.send_dice(message.chat.id)
@@ -92,10 +104,13 @@ def feel_pain_command(message):
     bot.send_sticker(message.chat.id, random_stickers)
 
 
-# Text speech
 @bot.message_handler(content_types=["text"])
 def send_text(message):
-
+    """
+    General speech
+    :param message:
+    :return:
+    """
     if message.text.lower in greetings:
         bot.send_chat_action(message.chat.id, "typing")
         bot.send_message(message.chat.id, "Greeting to you, peasant.")
@@ -108,5 +123,5 @@ def send_text(message):
         bot.send_message(message.chat.id, random_answer)
 
 
-# Bot start here
-bot.polling()
+if __name__ == '__main__':
+    bot.polling()
