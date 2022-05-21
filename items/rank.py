@@ -1,6 +1,7 @@
 rank = [
     "Loser !",
     "Unskill !",
+    "Lowskill !",
     "Stupid !",
     "Poor man !",
     "Mutant !",
