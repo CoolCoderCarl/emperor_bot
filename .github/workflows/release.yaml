@@ -23,6 +23,7 @@ jobs:
     outputs:
       get_current_tag: ${{ steps.set_current_tag_id.outputs.current_tag }}
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v2
 

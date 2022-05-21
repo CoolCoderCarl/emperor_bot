@@ -2,4 +2,7 @@ stickers = [
     "CAACAgIAAxkBAAEEpbNidYIQKrsr2bTLrnnORgLmReimxAACEwEAAkebCzXTI41mO5ZAVyQE",
     "CAACAgIAAxkBAAEEpbVidYIvFgRBBV-MU25MgNqN-03zdgACBAwAAj8ckEofIg3xavWV8iQE",
     "CAACAgIAAxkBAAEEpbdidYJmnk3Rkxtue-h9mCpOJEKQ2gACOwMAAkebCzWsU45nme1vtyQE",
+    "CAACAgIAAxkBAAEEpbdidYJmnk3Rkxtue-h9mCpOJEKQ2gACOwMAAkebCzWsU45nme1vtyQE",
+    "CAACAgIAAxkBAAEExehih4fDziL-tlxjopLbzZDi7YbuQwAC7w4AAsmkiUqD6XDbZNPpuSQE",
+    "CAACAgIAAxkBAAEExsFiiAKKsJxcOVwuUBHAuC6Yrw4IYgACGQEAAkebCzWCtIeW5--zIiQE",
 ]
