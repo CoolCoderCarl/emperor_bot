@@ -1,5 +1,5 @@
 pip==21.1.2
-setuptools==57.0.0
+setuptools==65.5.1
 pytelegrambotapi==3.7.1
 telebot==0.0.3
 requests==2.7.0
